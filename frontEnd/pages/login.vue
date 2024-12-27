@@ -70,9 +70,7 @@ const login = async () => {
 }
 
 const navigateToRegister = () => {
-  
     router.push('/register');
-
 };
 
 
@@ -93,7 +91,7 @@ const navigateToRegister = () => {
   background-color: #f0f0f0;
   border-radius : 5%;
   padding: 20px;
-}
+} 
 
 .input {
   width: 60%;

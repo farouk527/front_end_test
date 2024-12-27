@@ -26,6 +26,21 @@ export default class AuthService {
     }
   }
 
+  async Register(formData) {
+    try {
+      const response = await this.axiosInstance.post('/auth/register', {
+        username: formData.username, 
+        email: formData.email,
+        password: formData.password,
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Registration failed:', error);
+      throw new Error('Erreur d inscription: ' + error.response?.data?.message || error.message);
+
+    }
+  }
+
   logout() {
     localStorage.removeItem('auth_token');
     console.log(localStorage.getItem('auth_token'));

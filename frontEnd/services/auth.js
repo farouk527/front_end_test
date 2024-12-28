@@ -35,7 +35,7 @@ export default class AuthService {
       });
       return response.data;
     } catch (error) {
-      console.error('Registration failed:', error);
+      console.error('Erreur inscription:', error);
       throw new Error('Erreur d inscription: ' + error.response?.data?.message || error.message);
 
     }
@@ -43,8 +43,11 @@ export default class AuthService {
 
   logout() {
     localStorage.removeItem('auth_token');
-    console.log(localStorage.getItem('auth_token'));
   }
 
+  TokenValue() {
+    return localStorage.getItem('auth_token');
+
+  }
   
 }

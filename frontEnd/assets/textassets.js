@@ -5,6 +5,11 @@ export const textassets = {
     password:'Password',
     logout : "Logout",
     register: "Register",
-    username : "Username"
+    username : "Username",
+    createPost : "Description",
+    title : "Title",
+    description : "Description",
+    category : "Category",
+    CreatePs :" Create Post(s)"
   }
   

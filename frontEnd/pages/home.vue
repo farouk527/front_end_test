@@ -7,35 +7,12 @@
     </div>
 
     <div class="content-container">
-      <h1>Create Post(s)</h1>
-      
-      <UForm :schema="schema" :state="state" class="space-y-4" @submit="createPost">
-          <div class="flex items-center">
-            <UIcon name="i-heroicons-outline-document" class="w-5 h-5 mr-2" required/>
-            <label for="title">Title</label>
-          </div>
-          <UInput v-model="newPost.title" placeholder="Enter post title" class="input" required />
-
-          <div class="flex items-center">
-            <UIcon name="i-heroicons-outline-pencil" class="w-5 h-5 mr-2" />
-            <label for="description">Description</label>
-          </div>
-          <UInput v-model="newPost.description" placeholder="Enter post description" class="input" required />
-
-          <div class="flex items-center">
-            <UIcon name="i-heroicons-outline-tag" class="w-5 h-5 mr-2" />
-            <label for="category">Category</label>
-          </div>
-        <UInput v-model="newPost.category" placeholder="Enter the category" class="input" required />
-
-          <UButton type="submit" color="black">
-            Create Post
-          </UButton>
-          
-        </UForm>
-
-
-
+     <CreatePostComponent @Create-Post="createPostsubmit"/> 
+     <Alert 
+        v-if="showAlert"
+        :visible="showAlert"
+        :description="errormessage"
+      />  
     </div>
     <div class="content-container">
       <h1>ALL Post(s)</h1>
@@ -48,19 +25,36 @@ import { ref } from 'vue';
 import AuthService from '@/services/auth';
 import { textassets } from '@/assets/textassets';
 import { useRouter } from '#app';
+import CreatePostComponent from '@/components/CreatePostComponent.vue';
+import PostService from '@/services/Posts';
+import Alert from '@/components/Alert.vue' 
+
 
 const authService = new AuthService();
 const router = useRouter();
-const newPost = ref({
-  title: '',
-  description: '',
-  category: ''
-});
+const PostServiceins = new PostService();
+const errormessage = ref("");
+const showAlert = ref(false);
 
 const logout = () => {
   authService.logout();
   router.push('/login');
 };
+
+const createPostsubmit =  async (Postdata) => {
+  try {
+    await PostServiceins.CreatePost(Postdata.value,authService.TokenValue());
+    Postdata.title = "";
+    Postdata.description ="";
+    Postda.category = "";
+    showAlert.value = false; 
+  } catch (error) {
+    console.error("Registration error:", error);
+     errormessage.value = error.message
+    showAlert.value = true; 
+  }
+};
+
 
 
 </script>

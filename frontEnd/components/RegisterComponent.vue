@@ -19,7 +19,6 @@
             <label>{{ textassets.password }}</label>
           </div>
           <UInput v-model="form.password" type="password" class="input" placeholder="Enter Your Password ******" />
-          
           <UButton type="submit" color="black" @click="handleSubmit">
             {{ textassets.register }}
           </UButton>
@@ -32,6 +31,7 @@ import { ref } from 'vue';
 import { textassets } from '@/assets/textassets';
 
 const emit = defineEmits(['submit-form']);
+
 defineProps({
   onSubmit: {
     type: Function,

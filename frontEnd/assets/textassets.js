@@ -10,6 +10,8 @@ export const textassets = {
     title : "Title",
     description : "Description",
     category : "Category",
-    CreatePs :" Create Post(s)"
+    CreatePs :" Create Post(s)",
+    Update :"Update",
+    Delete : "Delete"
   }
   

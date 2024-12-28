@@ -16,6 +16,7 @@
     </div>
     <div class="content-container">
       <h1>ALL Post(s)</h1>
+    <VisualisationComponent :items="postsFromBackend" />
     </div>
   </div>
 </template>
@@ -26,8 +27,10 @@ import AuthService from '@/services/auth';
 import { textassets } from '@/assets/textassets';
 import { useRouter } from '#app';
 import CreatePostComponent from '@/components/CreatePostComponent.vue';
+import VisualisationComponent from '@/components/VisualisationComponent.vue';
 import PostService from '@/services/Posts';
 import Alert from '@/components/Alert.vue' 
+import { onMounted } from 'vue'
 
 
 const authService = new AuthService();
@@ -35,6 +38,27 @@ const router = useRouter();
 const PostServiceins = new PostService();
 const errormessage = ref("");
 const showAlert = ref(false);
+const postsFromBackend = ref([]);
+
+onMounted(async () => {
+  try {
+    const token = authService.TokenValue(); 
+    const response = await PostServiceins.getAllPosts(token);
+
+    const posts = response.data || response.posts || response; 
+
+    postsFromBackend.value = posts.map(post => ({
+      title: post.title,
+      description: post.description,
+      category: post.category,
+    }));
+
+    console.log(postsFromBackend.value); 
+  } catch (error) {
+    console.error('Erreur lors de la récupération des posts:', error.message);
+  }
+});
+
 
 const logout = () => {
   authService.logout();
@@ -49,11 +73,12 @@ const createPostsubmit =  async (Postdata) => {
     Postda.category = "";
     showAlert.value = false; 
   } catch (error) {
-    console.error("Registration error:", error);
      errormessage.value = error.message
     showAlert.value = true; 
   }
 };
+
+
 
 
 

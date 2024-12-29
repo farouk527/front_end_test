@@ -15,6 +15,7 @@ export const textassets = {
     Delete : "Delete",
     Confirm :"Confirm",
     allposts:"ALL Post(s)",
-    updatePost:"Update Post"
+    updatePost:"Update Post",
+    existingacount : "You Already Have An Account ? "
   }
   

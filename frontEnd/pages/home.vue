@@ -43,6 +43,11 @@ import Alert from '@/components/Alert.vue';
 import Modal from '@/components/Modalcomponent.vue';  
 import UpdatePostModal from '@/components/UpdatePostModal.vue';  
 
+definePageMeta({
+  middleware: [
+    'auth',  ]
+});
+
 const authService = new AuthService();
 const router = useRouter();
 const PostServiceins = new PostService();
@@ -52,6 +57,7 @@ const postsFromBackend = ref([]);
 const isModalVisible = ref(false);  
 const isUpdateModalVisible = ref(false);  
 const postIdToDeleteorUpdate = ref(null); 
+
 
 async function fetchPosts() {
   try {

@@ -43,6 +43,13 @@ import { textassets } from '@/assets/textassets'
 import AuthService from '@/services/auth';
 import Alert from '@/components/Alert.vue' 
 
+
+definePageMeta({
+  middleware: [
+    'redirectauth',
+  ]
+});
+
 const config = useRuntimeConfig()
 const apiBase = config.public.apiBase
 const authService = new AuthService(); 

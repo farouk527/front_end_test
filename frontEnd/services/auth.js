@@ -49,5 +49,10 @@ export default class AuthService {
     return localStorage.getItem('auth_token');
   }
 
+  isAuthenticated() {
+    const token = localStorage.getItem('auth_token');
+    return !!token;
+  }
+  
   
 }

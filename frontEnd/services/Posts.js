@@ -28,7 +28,6 @@ export default class PostService {
       );
       return response.data;
     } catch (error) {
-      console.error('Erreur de création:', error); 
       throw new Error('Erreur de création: ' + (error.response?.data?.message || error.message));
     }
   }
@@ -45,10 +44,44 @@ export default class PostService {
       );
       return response;
     } catch (error) {
-      console.error('Erreur de création:', error); 
       throw new Error('Erreur de création: ' + (error.response?.data?.message || error.message));
     }
   }
-  
- 
+
+  async DeletePost(id, token) {
+    try {
+      const response = await this.axiosInstance.delete(`/post/delete/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      return response;
+    } catch (error) {
+      throw new Error('Erreur de supression: ' + (error.response?.data?.message || error.message));
+    }
+  } 
+
+
+  async UpdatePost(id,formData, token) {
+    try {
+      const response = await this.axiosInstance.put(
+        `/post/update/${id}`,
+        {
+          title: formData.title,
+          description: formData.description,
+          category: formData.category,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, 
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error('Erreur de mise à jour: ' + (error.response?.data?.message || error.message));
+    }
+  }
+
 }
+
+
+

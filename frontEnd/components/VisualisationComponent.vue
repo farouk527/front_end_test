@@ -15,13 +15,13 @@
           <td>{{ item.category }}</td>
           <td>
              <UButton color="green" variant="solid"  @click="updateItem(item)">
-                          <UIcon name="i-heroicons-outline-pencil" class="w-5 h-5 mr-2" />
+                <UIcon name="i-heroicons-outline-pencil" class="w-5 h-5 mr-2" />
              </UButton>
           </td>
           <td>
-              <UButton color="red" variant="solid"  @click="updateItem(item)">
-                          <UIcon name="i-heroicons-outline-trash" class="w-5 h-5 mr-2" />
-</UButton>
+              <UButton color="red" variant="solid"  @click="deleteItem(item._id)">
+                <UIcon name="i-heroicons-outline-trash" class="w-5 h-5 mr-2" />
+                </UButton>
           </td>
 
         </tr>
@@ -33,6 +33,9 @@
 <script setup>
 import { defineProps } from 'vue'
 import { textassets } from '@/assets/textassets';
+
+
+const emit = defineEmits(['Delete-Post','Update-Post']);
 
 const columns = [
   { key: 'title', label: 'Title' },
@@ -47,11 +50,11 @@ const props = defineProps({
 })
 
 const updateItem = (item) => {
-  console.log('Mettre à jour l\'élément:');
+  emit("Update-Post",item);
 }
 
 const deleteItem = (id) => {
-  console.log('Supprimer l\'élément avec ID:');
+    emit("Delete-Post",id);
 }
 </script>
 

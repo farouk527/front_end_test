@@ -6,12 +6,15 @@ export const textassets = {
     logout : "Logout",
     register: "Register",
     username : "Username",
-    createPost : "Description",
+    createPost : "Create",
     title : "Title",
     description : "Description",
     category : "Category",
     CreatePs :" Create Post(s)",
     Update :"Update",
-    Delete : "Delete"
+    Delete : "Delete",
+    Confirm :"Confirm",
+    allposts:"ALL Post(s)",
+    updatePost:"Update Post"
   }
   

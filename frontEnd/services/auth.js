@@ -47,7 +47,7 @@ export default class AuthService {
 
   TokenValue() {
     return localStorage.getItem('auth_token');
-
   }
+
   
 }

@@ -12,7 +12,7 @@
             <UIcon name="i-heroicons-outline-pencil" class="w-5 h-5 mr-2" />
             <label for="description">{{textassets.description}}</label>
           </div>
-          <UInput v-model="newPost.description" placeholder="Enter post description" class="input"  />
+          <UTextarea v-model="newPost.description" placeholder="Enter post description" class="input" textarea />
 
           <div class="flex items-center">
             <UIcon name="i-heroicons-outline-tag" class="w-5 h-5 mr-2" />
@@ -32,7 +32,6 @@
 import { ref } from 'vue';
 import { textassets } from '@/assets/textassets'
 
-
 const emit = defineEmits(['Create-Post']);
 
 const newPost = ref({
@@ -41,8 +40,14 @@ const newPost = ref({
   category: ''
 });
 
-const createPost = () => {
-  emit('Create-Post', newPost); 
+function resetForm() {
+  newPost.value = { title: '', description: '', category: '' }; 
 }
 
+const createPost = () => {
+  emit('Create-Post', newPost.value); 
+  resetForm(); 
+};
 </script>
+
+

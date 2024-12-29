@@ -8,7 +8,7 @@
         :description="errormessage"
       />
       <div>
-          You Already Have An Account ? 
+         {{textassets.existingacount}}
           <button @click="navigateToLogin" style="color:red;">You Can Login</button>
         </div> 
   </div>
@@ -21,8 +21,13 @@ import RegisterComponent from '@/components/RegisterComponent.vue';
 import AuthService from '@/services/auth';
 import Alert from '@/components/Alert.vue' 
 import { useRouter } from '#app'
-  
+import { textassets } from '@/assets/textassets'
 
+definePageMeta({
+  middleware: [
+    'redirectauth',
+  ]
+});
 
 const authService = new AuthService(); 
 const errormessage = ref("");
